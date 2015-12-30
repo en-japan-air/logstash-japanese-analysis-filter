@@ -1,0 +1,5 @@
+en japan
+Copyright 2012-2015 en japan
+
+This product includes software developed by The Apache Software
+Foundation (http://www.apache.org/).
