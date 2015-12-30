@@ -36,19 +36,19 @@ class LogStash::Filters::JapanesePos < LogStash::Filters::Base
 
   public
   def filter(event)
-		pos = @fields.map do |field|
-			text = event[field]
+    pos = @fields.map do |field|
+      text = event[field]
       next if text.nil? || text.empty?
-			analyzed_hash = @analyzer.analyze(text)
-			analyzed_hash.map do |key, value|
+      analyzed_hash = @analyzer.analyze(text)
+      analyzed_hash.map do |key, value|
         value.delete(:positions) unless @with_positions
-				value.merge(value: key.to_s, field: field.to_s)
-			end
+        value.merge(value: key.to_s, field: field.to_s)
+      end
     end.flatten
 
-		event[@output_field] = pos unless pos.empty?
+    event[@output_field] = pos unless pos.empty?
 
-		# filter_matched should go in the last line of our successful code
+    # filter_matched should go in the last line of our successful code
     filter_matched(event)
   end # def filter
 end # class LogStash::Filters::Example
