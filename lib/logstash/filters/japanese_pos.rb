@@ -36,7 +36,7 @@ class LogStash::Filters::JapanesePos < LogStash::Filters::Base
 
   public
   def filter(event)
-    pos = @fields.map do |field|
+    pos = @fields.map do |field| event.sprintf(field).split(',') end.flatten.map do |field|
       text = event[field]
       next if text.nil? || text.empty?
       analyzed_hash = @analyzer.analyze(text)
