@@ -19,4 +19,20 @@ describe LogStash::Filters::JapanesePos do
       expect(subject['pos'].size).to eq(2)
     end
   end
+
+  describe "Use dynamic fields" do
+    fields = ["field1"]
+    config <<-CONFIG
+      filter {
+        japanese_pos {
+          fields => "%{fields}"
+        }
+      }
+    CONFIG
+
+    sample("field1" => "写真はイメージです", "fields" => fields) do
+      expect(subject).to include("words")
+      expect(subject['words'].size).to eq(2)
+    end
+  end
 end
