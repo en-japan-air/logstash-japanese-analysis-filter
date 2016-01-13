@@ -14,8 +14,6 @@ class JapaneseAnalyzer
   def analyze(text)
     mecab = @mecabs[Thread.current] ||= Natto::MeCab.new(@mecab_options)
 
-    puts "#{@mecabs.size} SIZE ###############"
-
     result = {}
     i = 0
     mecab.parse(text) do |t|
