@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'natto'
+require 'load_jars'
 
 # Analyzer of Japanese string data
 class JapaneseAnalyzer
@@ -12,14 +13,25 @@ class JapaneseAnalyzer
   end
 
   def analyze(text)
-    mecab = @mecabs[Thread.current] ||= Natto::MeCab.new(@mecab_options)
+    tokenizer = Java::com.enjapan.preprocessing.japanese.tokenizers.KuromojiTokenizer.new(
+        Java::com.atilika.kuromoji.ipadic::Tokenizer.new,
+        Java::scala.collection.immutable::Set.empty,
+        Java::scala.collection.immutable::Set.empty,
+        Java::scala.collection::Set.empty.
+            +(Java::scala.collection.immutable::List.empty.send("::", "助詞")).
+            +(Java::scala.collection.immutable::List.empty.send("::", "助動詞")).
+            +(Java::scala.collection.immutable::List.empty.send("::", "記号")).
+            +(Java::scala.collection.immutable::List.empty.send("::", "終助詞"))
+    )
 
     result = {}
     i = 0
-    mecab.parse(text) do |t|
-      surface = t.surface
-      pos = t.feature.split(',')[0]
-      next if t.is_eos? || t.stat != 0 || t.char_type == 3 || @ignore_pos.include?(pos)
+    tokenized = Java::scala.collection.JavaConversions.seqAsJavaList(tokenizer.tokenizeWithMetadata(text)).to_a
+    tokenized.each do |t|
+      surface = t.getBaseForm
+      # TODO put all the POS as an array or a dictionary
+      pos = t.getPartOfSpeechLevel1
+      # next if t.is_eos? || t.stat != 0 || t.char_type == 3 || @ignore_pos.include?(pos)
       unless result.key?(surface)
         result[surface] = {
           pos: pos,
