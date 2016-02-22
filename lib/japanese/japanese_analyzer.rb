@@ -31,10 +31,10 @@ class JapaneseAnalyzer
       surface = t.getSurface
       unless result.key?(surface)
         result[surface] = {
-          pos: [ :pos1 => t.getPartOfSpeechLevel1,
+          pos: { :pos1 => t.getPartOfSpeechLevel1,
                  :pos2 => t.getPartOfSpeechLevel2,
                  :pos3 => t.getPartOfSpeechLevel3,
-                 :pos4 => t.getPartOfSpeechLevel4],
+                 :pos4 => t.getPartOfSpeechLevel4},
           positions: []
         }
       end
