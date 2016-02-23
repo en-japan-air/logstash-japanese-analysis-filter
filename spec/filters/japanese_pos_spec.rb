@@ -60,6 +60,27 @@ describe LogStash::Filters::JapanesePos do
     end
   end
 
+  describe "Should handle romaji" do
+    let(:config) do
+      <<-CONFIG
+      filter {
+        japanese_pos {
+          fields => ['message']
+          output_field => 'pos'
+        }
+      }
+      CONFIG
+    end
+
+    sample("message" => "mateuszは背が高いです。") do
+      expect(subject).to include("pos")
+      expect(subject['pos'].size).to eq(3)
+      expect(subject['pos'][0][:value]).to eq('mateusz')
+      expect(subject['pos'][1][:value]).to eq('背')
+      expect(subject['pos'][2][:value]).to eq('高い')
+    end
+  end
+
   describe "Persist all postions of a token." do
     let(:config) do
       <<-CONFIG

@@ -29,7 +29,11 @@ class JapaneseAnalyzer
     i = 0
     tokenized = Java::scala.collection.JavaConversions.seqAsJavaList(@tokenizer.tokenizeWithMetadata(text)).to_a
     tokenized.each do |t|
-      surface = t.getBaseForm
+      surface = if t.getBaseForm.eql? '*'
+                  t.surface
+                else
+                  t.getBaseForm
+                end
       unless result.key?(surface)
         result[surface] = {
           pos: { :pos1 => t.getPartOfSpeechLevel1,
