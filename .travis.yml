@@ -3,14 +3,5 @@ rvm:
   - jruby-19mode
 cache: 
   bundler: true
-  directories:
-    - "$HOME/mecab"
-    - "$HOME/mecab-0.996"
-    - "$HOME/mecab-ipadic-2.7.0-20070801"
-    - "$HOME/mecab-ipadic-neologd"
 install:
-  - bash travis_mecab.sh
   - bundle install --jobs=3 --retry=3
-env:
-  global:
-    - MECAB_PATH=$HOME/mecab/lib/libmecab.so

@@ -8,9 +8,10 @@ Gem::Specification.new do |s|
   s.email = 'contact@en-japan.io'
   s.homepage = "https://github.com/en-japan/logstash-japanese-analysis-filter"
   s.require_paths = ["lib"]
+  s.extensions = ["Rakefile"]
 
   # Files
-  s.files = Dir['lib/**/*','spec/**/*','vendor/**/*','*.gemspec','*.md','CONTRIBUTORS','Gemfile','LICENSE','NOTICE.TXT']
+  s.files = Dir['lib/**/*','spec/**/*','vendor/**/*','*.gemspec','*.md','CONTRIBUTORS','Gemfile','LICENSE','NOTICE.TXT', 'Jarfile.lock']
    # Tests
   s.test_files = s.files.grep(%r{^(test|spec|features)/})
 

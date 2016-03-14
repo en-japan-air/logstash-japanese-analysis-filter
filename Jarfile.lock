@@ -1,0 +1,63 @@
+---
+version: 0.14.6
+merged:
+- gem:logstash-japanese-analysis-filter:Jarfile.lock
+groups:
+  default:
+    dependencies:
+    - com.atilika.kuromoji:kuromoji-core:jar:0.9.0
+    - com.atilika.kuromoji:kuromoji-ipadic:jar:0.9.0
+    - com.enjapan:japanese-tokenizers_2.11:jar:0.0.4
+    - com.enjapan:scala-juman-knp_2.11:jar:0.0.3
+    - com.github.mariten:kanatools-java:jar:1.2.0
+    - com.github.mpilquist:simulacrum_2.11:jar:0.7.0
+    - org.hamcrest:hamcrest-core:jar:1.3
+    - org.scala-lang:scala-library:jar:2.11.7
+    - org.scala-lang:scala-reflect:jar:2.11.7
+    - org.scala-sbt:test-interface:jar:1.0
+    - org.scalacheck:scalacheck_2.11:jar:1.12.5
+    - org.spire-math:algebra-laws_2.11:jar:0.3.1
+    - org.spire-math:algebra-macros_2.11:jar:0.3.1
+    - org.spire-math:algebra-std_2.11:jar:0.3.1
+    - org.spire-math:algebra_2.11:jar:0.3.1
+    - org.typelevel:catalysts-macros_2.11:jar:0.0.2
+    - org.typelevel:catalysts-platform_2.11:jar:0.0.2
+    - org.typelevel:cats-core_2.11:jar:0.4.0
+    - org.typelevel:cats-jvm_2.11:jar:0.4.0
+    - org.typelevel:cats-laws_2.11:jar:0.4.0
+    - org.typelevel:cats-macros_2.11:jar:0.4.0
+    - org.typelevel:cats_2.11:jar:0.4.0
+    - org.typelevel:discipline_2.11:jar:0.4
+    - org.typelevel:machinist_2.11:jar:0.4.1
+    - org.typelevel:macro-compat_2.11:jar:1.1.0
+    artifacts:
+    - jar:com.enjapan:japanese-tokenizers_2.11:jar:0.0.4:
+        transitive:
+          com.atilika.kuromoji:kuromoji-ipadic:jar:0.9.0:
+            com.atilika.kuromoji:kuromoji-core:jar:0.9.0: {}
+          org.typelevel:cats_2.11:jar:0.4.0:
+            org.typelevel:cats-core_2.11:jar:0.4.0: {}
+            org.typelevel:cats-laws_2.11:jar:0.4.0:
+              org.typelevel:catalysts-platform_2.11:jar:0.0.2:
+                org.typelevel:catalysts-macros_2.11:jar:0.0.2: {}
+              org.scalacheck:scalacheck_2.11:jar:1.12.5:
+                org.scala-sbt:test-interface:jar:1.0: {}
+              org.spire-math:algebra-laws_2.11:jar:0.3.1:
+                org.spire-math:algebra-macros_2.11:jar:0.3.1: {}
+              org.typelevel:discipline_2.11:jar:0.4: {}
+            org.spire-math:algebra_2.11:jar:0.3.1: {}
+            org.typelevel:machinist_2.11:jar:0.4.1:
+              org.scala-lang:scala-reflect:jar:2.11.7: {}
+            org.typelevel:cats-macros_2.11:jar:0.4.0: {}
+            org.typelevel:cats-jvm_2.11:jar:0.4.0: {}
+            org.spire-math:algebra-std_2.11:jar:0.3.1: {}
+            com.github.mpilquist:simulacrum_2.11:jar:0.7.0:
+              org.typelevel:macro-compat_2.11:jar:1.1.0: {}
+          com.github.mariten:kanatools-java:jar:1.2.0:
+            org.hamcrest:hamcrest-core:jar:1.3: {}
+          com.enjapan:scala-juman-knp_2.11:jar:0.0.3: {}
+    - jar:org.scala-lang:scala-library:jar:2.11.7:
+        transitive: {}
+remote_repositories:
+- http://repo1.maven.org/maven2/
+- http://dl.bintray.com/en-japan/maven-oss
